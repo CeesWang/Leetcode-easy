@@ -1,0 +1,38 @@
+class Solution {
+    public int minTimeToVisitAllPoints(int[][] points) {
+        if (points == null || points.length == 0 || points.length == 1) {
+            return 0;
+        }
+        int time = 0;
+        int runningX = points[0][0];
+        int runningY = points[0][1];
+        for (int i = 1; i < points.length; ++i) {
+            int nextX = points[i][0];
+            int nextY = points[i][1];
+            time += findOptimalPath(runningX, runningY, nextX, nextY);
+            runningX = nextX;
+            runningY = nextY;
+        }
+        return time;
+    }
+    
+    public int findOptimalPath(int runningX, int runningY, int nextX, int nextY) {
+        int time = 0;
+        while (runningX != nextX || runningY != nextY) {
+            if (runningX < nextX) {
+                runningX++;
+            }
+            else if (runningX > nextX) {
+                runningX--;
+            }
+            if (runningY < nextY) {
+                runningY++;
+            }
+            else if (runningY > nextY) {
+                runningY--;
+            }
+            time++;
+        }
+        return time;
+    }
+}
