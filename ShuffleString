@@ -1,26 +1,15 @@
 class Solution {
     public String restoreString(String s, int[] indices) {
-        if (indices.length == 0) {
-            return s;
-        }
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.idx - b.idx);
+        StringBuilder sb = new StringBuilder();
+        HashMap<Integer,Character> map = new HashMap<>();
         for (int i = 0; i < indices.length; ++i) {
             char c = s.charAt(i);
-            pq.add(new Pair(indices[i], c));
+            map.put(indices[i], c);
         }
-        StringBuilder sb = new StringBuilder();
-        while (!pq.isEmpty()) {
-            sb.append(pq.poll().c);
+        for (int i = 0; i < indices.length; ++i) {
+            sb.append(map.get(i));
         }
         return sb.toString();
     }
-    
-    public class Pair {
-        char c;
-        int idx;
-        Pair(int idx, char c) {
-            this.idx = idx;
-            this.c = c;
-        }
-    }
+
 }
