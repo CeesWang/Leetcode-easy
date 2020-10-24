@@ -1,0 +1,26 @@
+class Solution {
+    public String restoreString(String s, int[] indices) {
+        if (indices.length == 0) {
+            return s;
+        }
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.idx - b.idx);
+        for (int i = 0; i < indices.length; ++i) {
+            char c = s.charAt(i);
+            pq.add(new Pair(indices[i], c));
+        }
+        StringBuilder sb = new StringBuilder();
+        while (!pq.isEmpty()) {
+            sb.append(pq.poll().c);
+        }
+        return sb.toString();
+    }
+    
+    public class Pair {
+        char c;
+        int idx;
+        Pair(int idx, char c) {
+            this.idx = idx;
+            this.c = c;
+        }
+    }
+}
